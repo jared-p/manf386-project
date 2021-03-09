@@ -1,0 +1,4 @@
+<!-- AWP_In_Variable Name='"ModelPIDWebVisuInterface".Params.ts' -->
+
+{
+"Parameters":[{"Name":"ts","name":"ts","DefaultValue":0.1,"value":":="ModelPIDWebVisuInterface".Params.ts:","plcPath":"\"ModelPIDWebVisuInterface\".Params.ts"}]}

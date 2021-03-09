@@ -1,0 +1,111 @@
+/* CSS Design Simulink Scope
+-------------------------------------
+    Simulink Web Visualization
+    Dominic.Juland@siemens.com
+    
+    CSS Design for the simulink scope view.
+    
+    History:
+
+    2018-07-04 DH:
+        Rearrange trace layout
+    2017-05-31 DJ:
+        First create of the css file.
+*/
+
+#SimulinkScope{
+    position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+    min-width: 800px;
+    min-height: 600px;
+	z-index: 20;
+	background-color: rgba(0,0,0,0.5);
+}
+
+#SimulinkScope div.Container{
+    position: relative;
+    margin: auto;
+    padding: 30px;
+	width: 60%;
+    min-width: 350px;
+	height: 50%;
+    min-height: 200px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    top:50%;
+	transform: translateY(-50%);
+	z-index: 21;
+    background-color: #282828;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+
+#SimulinkScope div.Container div.ScopeContainer {
+    position: inherit;
+    width: 100%;
+    height: 85%;
+	box-sizing: border-box;
+	background: #282828;
+    color: #ffffff;
+	box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+#SimulinkScope div.Container div.ScopeContainer div.Scope {
+    position: inherit;
+    width: 100%;
+    height: 100%;
+	font-size: 14px;
+    color: #ffffff;
+	line-height: 1.0em;
+}
+
+#SimulinkScope div.Container div.Values {
+    display: flex;
+    justify-content: space-around;
+}
+
+#SimulinkScope div.Container div.Control {
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+#SimulinkScope .controlPanel {
+    width: 100%;
+    margin-bottom: -30px;
+}
+
+#SimulinkScope table .yInput {
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+}
+
+#SimulinkScope table .inputContainer, #SimulinkScope table .traceButtons {
+    display: flex;
+    align-items: baseline;
+	border: 2px outset #959595;
+	padding: 2px;
+}
+
+#SimulinkScope table .inputContainer label {
+    width: 75px;
+}
+
+#SimulinkScope table .inputContainer input {
+    flex: 1;
+}
+
+#SimulinkScope table .traceButtons {
+    justify-content: flex-end;
+	border: none;
+}
+
+#SimulinkScope table .traceButtons button {
+    margin-left: 5px;
+}
