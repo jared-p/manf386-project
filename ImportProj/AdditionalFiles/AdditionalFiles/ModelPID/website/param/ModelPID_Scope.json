@@ -1,0 +1,1 @@
+{"TraceConfig": {"Name":"Scope","FullBlockpath":"ModelPID/Scope","Inputs":["sig_Setpoint","sig_ProcessValue","sig_Difference","sig_SatOut"]}}

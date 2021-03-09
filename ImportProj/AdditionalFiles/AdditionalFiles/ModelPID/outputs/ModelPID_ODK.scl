@@ -1,0 +1,779 @@
+FUNCTION_BLOCK "ModelPID_Load"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+//This block is AUTO GENERATED - DO NOT MODIFY this block!
+//Created by ODK_CodeGenerator version 205.0.2601.8
+//at Thu August 9 11:19:13 2018
+//max. number of parallel calls into this ODK application is: 1
+//*************************************************************
+  VAR_INPUT 
+    REQ : Bool;
+  END_VAR
+  VAR_OUTPUT 
+    DONE : Bool;
+    BUSY : Bool;
+    ERROR : Bool;
+    STATUS : Int;
+  END_VAR
+  VAR 
+    ODK_Load_Instance {OriginalPartName := 
+        'ODK_Load_SFB_2011'; LibVersion := '1.0'} : ODK_Load;
+    _odk_internal_LIBRARY_NAME : String := '<rt>ModelPID_ODK.so';
+  END_VAR
+  VAR CONSTANT 
+    _odk_internal_INSTANCE_ID : UDInt := 4063686767;
+  END_VAR
+BEGIN
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.5
+  // DO NOT CHANGE !!
+  //
+  #ODK_Load_Instance (REQ:=#REQ,
+                      LIBRARY_NAME:=#_odk_internal_LIBRARY_NAME,
+                      INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
+                      DONE=>#DONE,
+                      BUSY=>#BUSY,
+                      ERROR=>#ERROR,
+                      STATUS=>#STATUS);
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.5
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
+END_FUNCTION_BLOCK
+
+FUNCTION_BLOCK "ModelPID_Unload"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+//This block is AUTO GENERATED - DO NOT MODIFY this block!
+//Created by ODK_CodeGenerator version 205.0.2601.8
+//at Thu August 9 11:19:13 2018
+//max. number of parallel calls into this ODK application is: 1
+//*************************************************************
+  VAR_INPUT 
+    REQ : Bool;
+  END_VAR
+  VAR_OUTPUT 
+    DONE : Bool;
+    BUSY : Bool;
+    ERROR : Bool;
+    STATUS : Int;
+  END_VAR
+  VAR
+    ODK_Unld_Instance {OriginalPartName := 
+         'ODK_Unld_SFB_2012'; LibVersion := '1.0'} : ODK_Unld;
+  END_VAR
+  VAR CONSTANT 
+    _odk_internal_INSTANCE_ID : UDInt := 4063686767;
+  END_VAR
+BEGIN
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.5
+  // DO NOT CHANGE !!
+  //
+  #ODK_Unld_Instance (REQ:=#REQ,
+                      INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
+                      DONE=>#DONE,
+                      BUSY=>#BUSY,
+                      ERROR=>#ERROR,
+                      STATUS=>#STATUS);    
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.5
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
+END_FUNCTION_BLOCK
+
+TYPE "ModelPIDInternalModelSignals"
+VERSION : 0.1
+//This block is AUTO GENERATED - DO NOT MODIFY this block!
+//Created by ODK_CodeGenerator version 205.0.2601.8
+//at Thu August 9 11:19:13 2018
+//********************************************************
+  STRUCT
+    "sig_Setpoint" : LREAL;
+    "sig_ProcessValue" : LREAL;
+    "sig_Difference" : LREAL;
+    "sig_SatOut" : LREAL;
+  END_STRUCT;
+END_TYPE
+
+TYPE "ModelPIDParams"
+VERSION : 0.1
+//This block is AUTO GENERATED - DO NOT MODIFY this block!
+//Created by ODK_CodeGenerator version 205.0.2601.8
+//at Thu August 9 11:19:13 2018
+//********************************************************
+  STRUCT
+    "ModelPID_PIDController_D" : LREAL; // [PIDController/Derivative Gain]:ModelPID_P.PIDController_D
+    "ModelPID_PIDController_I" : LREAL; // [PIDController/Integral Gain]:ModelPID_P.PIDController_I
+    "ModelPID_PIDController_N" : LREAL; // [PIDController/Filter Coefficient]:ModelPID_P.PIDController_N
+    "ModelPID_PIDController_P" : LREAL; // [PIDController/Proportional Gain]:ModelPID_P.PIDController_P
+    "ModelPID_entcoupleSetpoint_Gain" : LREAL; // [entcoupleSetpoint]:ModelPID_P.entcoupleSetpoint_Gain
+    "ModelPID_entcoupleProcessValue_Gain" : LREAL; // [entcoupleProcessValue]:ModelPID_P.entcoupleProcessValue_Gain
+    "ModelPID_Integrator_gainval" : LREAL; // [PIDController/Integrator]:ModelPID_P.Integrator_gainval
+    "ModelPID_Integrator_IC" : LREAL; // [PIDController/Integrator]:ModelPID_P.Integrator_IC
+    "ModelPID_Filter_gainval" : LREAL; // [PIDController/Filter]:ModelPID_P.Filter_gainval
+    "ModelPID_Filter_IC" : LREAL; // [PIDController/Filter]:ModelPID_P.Filter_IC
+    "ModelPID_Saturation_UpperSat" : LREAL; // [Saturation]:ModelPID_P.Saturation_UpperSat
+    "ModelPID_Saturation_LowerSat" : LREAL; // [Saturation]:ModelPID_P.Saturation_LowerSat
+    "ModelPID_entcouplePIDout_Gain" : LREAL; // [entcouplePIDout]:ModelPID_P.entcouplePIDout_Gain
+  END_STRUCT;
+END_TYPE
+
+FUNCTION_BLOCK "ModelPIDOneStep"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+//This block is AUTO GENERATED - DO NOT MODIFY this block!
+//Created by ODK_CodeGenerator version 205.0.2601.8
+//at Thu August 9 11:19:13 2018
+//max. number of parallel calls into this ODK application is: 1
+//*************************************************************
+// This is generated by Target 1500S for Simulink
+// Model name:                  ModelPID
+// Model version:               1.66
+//                
+// ODK 1500S version:           V2.5
+// Target 1500S version:        V2.0         
+// MATLAB version:              9.3 (R2017b) 24-Jul-2017
+// Simulink version:            9.0 (R2017b) 24-Jul-2017
+// MATLAB Coder version:        3.4 (R2017b) 24-Jul-2017
+// Simulink Coder version:      8.13 (R2017b) 24-Jul-2017
+// 
+// ***Model details***
+// Step Size:                   0.1
+// Default parameter behaviour: Tunable
+// External Mode:               On
+// Allow OneStep and
+// CallExtMode FBs to be
+// called in different OBs      No
+// 
+// ***ODK 1500S details***  
+// Heap Size:                   32k
+// Max Block Size:              1024
+// Size of thread stack:        32k
+// SyncCallParallelCount:       1(max. number of parallel calls into this ODK application)
+// ********************************************************
+// 
+  VAR_INPUT
+    "setpoint" : LREAL;
+    "processValue" : LREAL;
+  END_VAR
+  VAR_OUTPUT
+    STATUS : INT := 0;
+    "outPID" : LREAL;
+    "internalSignals" : "ModelPIDInternalModelSignals";
+  END_VAR
+  VAR
+    _odk_internal_Last_REQ : Bool := false;
+    _odk_internal_Last_BUSY : Bool := false;
+    _odk_internal_IN_BUFFER : Array [0..15] of Byte;
+    _odk_internal_OUT_BUFFER : Array [0..39] of Byte;
+  END_VAR
+  VAR_TEMP 
+    _odk_internal_pos : DInt;
+    _odk_internal_err : Int;
+    _odk_internal_i : DInt;
+  END_VAR
+  VAR CONSTANT 
+    _odk_internal_INSTANCE_ID : UDINT := 4063686767;
+    _odk_internal_COMMAND : UDINT := 1728603471;
+  END_VAR
+BEGIN
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.5
+  // DO NOT CHANGE !!
+  //
+  // This is generated by Target 1500S for Simulink
+  // Model name:                  ModelPID
+  // Model version:               1.66
+  //                
+  // ODK 1500S version:           V2.5
+  // Target 1500S version:        V2.0         
+  // MATLAB version:              9.3 (R2017b) 24-Jul-2017
+  // Simulink version:            9.0 (R2017b) 24-Jul-2017
+  // MATLAB Coder version:        3.4 (R2017b) 24-Jul-2017
+  // Simulink Coder version:      8.13 (R2017b) 24-Jul-2017
+  // 
+  // ***Model details***
+  // Step Size:                   0.1
+  // Default parameter behaviour: Tunable
+  // External Mode:               On
+  // Allow OneStep and
+  // CallExtMode FBs to be
+  // called in different OBs      No
+  // 
+  // ***ODK 1500S details***  
+  // Heap Size:                   32k
+  // Max Block Size:              1024
+  // Size of thread stack:        32k
+  // SyncCallParallelCount:       1(max. number of parallel calls into this ODK application)
+  // ********************************************************
+  // 
+  #_odk_internal_pos := 0;
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #setpoint, dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #processValue, dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
+  #STATUS:=ODK_ExcS(INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
+                    COMMAND:=#_odk_internal_COMMAND,
+                    IN_DATA:=#_odk_internal_IN_BUFFER,
+                    INOUT_DATA:=null,
+                    OUT_DATA:=#_odk_internal_OUT_BUFFER
+                    );
+  IF INT_TO_UINT(#STATUS) < 16#7000 THEN
+    #_odk_internal_pos := 0;
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #outPID, src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #internalSignals.#sig_Setpoint, src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #internalSignals.#sig_ProcessValue, src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #internalSignals.#sig_Difference, src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #internalSignals.#sig_SatOut, src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
+  END_IF;
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.5
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
+END_FUNCTION_BLOCK
+
+FUNCTION_BLOCK "ModelPIDExtModeInternal"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+//This block is AUTO GENERATED - DO NOT MODIFY this block!
+//Created by ODK_CodeGenerator version 205.0.2601.8
+//at Thu August 9 11:19:13 2018
+//max. number of parallel calls into this ODK application is: 1
+//*************************************************************
+// This is generated by Target 1500S for Simulink
+// Model name:                  ModelPID
+// Model version:               1.66
+//                
+// ODK 1500S version:           V2.5
+// Target 1500S version:        V2.0         
+// MATLAB version:              9.3 (R2017b) 24-Jul-2017
+// Simulink version:            9.0 (R2017b) 24-Jul-2017
+// MATLAB Coder version:        3.4 (R2017b) 24-Jul-2017
+// Simulink Coder version:      8.13 (R2017b) 24-Jul-2017
+// 
+// ***Model details***
+// Step Size:                   0.1
+// Default parameter behaviour: Tunable
+// External Mode:               On
+// Allow OneStep and
+// CallExtMode FBs to be
+// called in different OBs      No
+// 
+// ***ODK 1500S details***  
+// Heap Size:                   32k
+// Max Block Size:              1024
+// Size of thread stack:        32k
+// SyncCallParallelCount:       1(max. number of parallel calls into this ODK application)
+// ********************************************************
+// 
+// This function will be used internally for External Mode. Please do not call this function
+  VAR_INPUT
+    "receiveLength" : UDINT;
+    "stateIn" : UDINT;
+  END_VAR
+  VAR_OUTPUT
+    STATUS : INT := 0;
+    "sendLength" : UDINT;
+    "funcError" : BOOL;
+    "funcStatus" : WORD;
+    "stateOut" : UDINT;
+  END_VAR
+  VAR_IN_OUT
+    "bufferToModel" : Array[0..65535] of BYTE;
+    "bufferFromModel" : Array[0..65535] of BYTE;
+  END_VAR
+  VAR
+    _odk_internal_Last_REQ : Bool := false;
+    _odk_internal_Last_BUSY : Bool := false;
+    _odk_internal_IN_BUFFER : Array [0..7] of Byte;
+    _odk_internal_INOUT_BUFFER : Array [0..131071] of Byte;
+    _odk_internal_OUT_BUFFER : Array [0..10] of Byte;
+  END_VAR
+  VAR_TEMP 
+    _odk_internal_pos : DInt;
+    _odk_internal_err : Int;
+    _odk_internal_i : DInt;
+  END_VAR
+  VAR CONSTANT 
+    _odk_internal_INSTANCE_ID : UDINT := 4063686767;
+    _odk_internal_COMMAND : UDINT := 940238321;
+  END_VAR
+BEGIN
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.5
+  // DO NOT CHANGE !!
+  //
+  // This is generated by Target 1500S for Simulink
+  // Model name:                  ModelPID
+  // Model version:               1.66
+  //                
+  // ODK 1500S version:           V2.5
+  // Target 1500S version:        V2.0         
+  // MATLAB version:              9.3 (R2017b) 24-Jul-2017
+  // Simulink version:            9.0 (R2017b) 24-Jul-2017
+  // MATLAB Coder version:        3.4 (R2017b) 24-Jul-2017
+  // Simulink Coder version:      8.13 (R2017b) 24-Jul-2017
+  // 
+  // ***Model details***
+  // Step Size:                   0.1
+  // Default parameter behaviour: Tunable
+  // External Mode:               On
+  // Allow OneStep and
+  // CallExtMode FBs to be
+  // called in different OBs      No
+  // 
+  // ***ODK 1500S details***  
+  // Heap Size:                   32k
+  // Max Block Size:              1024
+  // Size of thread stack:        32k
+  // SyncCallParallelCount:       1(max. number of parallel calls into this ODK application)
+  // ********************************************************
+  // 
+  // This function will be used internally for External Mode. Please do not call this function
+  #_odk_internal_pos := 0;
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #receiveLength, dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #stateIn, dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_pos := 0;
+  MOVE_BLK(COUNT := 65536, IN := #bufferToModel[0], OUT := _odk_internal_INOUT_BUFFER[#_odk_internal_pos]);
+  #_odk_internal_pos  := #_odk_internal_pos +65536;
+  MOVE_BLK(COUNT := 65536, IN := #bufferFromModel[0], OUT := _odk_internal_INOUT_BUFFER[#_odk_internal_pos]);
+  #_odk_internal_pos  := #_odk_internal_pos +65536;
+  #STATUS:=ODK_ExcS(INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
+                    COMMAND:=#_odk_internal_COMMAND,
+                    IN_DATA:=#_odk_internal_IN_BUFFER,
+                    INOUT_DATA:=#_odk_internal_INOUT_BUFFER,
+                    OUT_DATA:=#_odk_internal_OUT_BUFFER
+                    );
+  IF INT_TO_UINT(#STATUS) < 16#7000 THEN
+    #_odk_internal_pos := 0;
+    MOVE_BLK(COUNT := 65536, IN := _odk_internal_INOUT_BUFFER[#_odk_internal_pos], OUT := #bufferToModel[0]);
+    #_odk_internal_pos  := #_odk_internal_pos +65536;
+    MOVE_BLK(COUNT := 65536, IN := _odk_internal_INOUT_BUFFER[#_odk_internal_pos], OUT := #bufferFromModel[0]);
+    #_odk_internal_pos  := #_odk_internal_pos +65536;
+    #_odk_internal_pos := 0;
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #sendLength, src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
+    #funcError := BYTE_TO_BOOL(#_odk_internal_OUT_BUFFER[#_odk_internal_pos]);
+    #_odk_internal_pos  := #_odk_internal_pos + 1;
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #funcStatus, src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #stateOut, src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
+  END_IF;
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.5
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
+END_FUNCTION_BLOCK
+
+FUNCTION_BLOCK "ModelPIDReadWriteParameters"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+//This block is AUTO GENERATED - DO NOT MODIFY this block!
+//Created by ODK_CodeGenerator version 205.0.2601.8
+//at Thu August 9 11:19:13 2018
+//max. number of parallel calls into this ODK application is: 1
+//*************************************************************
+// This is generated by Target 1500S for Simulink
+// Model name:                  ModelPID
+// Model version:               1.66
+//                
+// ODK 1500S version:           V2.5
+// Target 1500S version:        V2.0         
+// MATLAB version:              9.3 (R2017b) 24-Jul-2017
+// Simulink version:            9.0 (R2017b) 24-Jul-2017
+// MATLAB Coder version:        3.4 (R2017b) 24-Jul-2017
+// Simulink Coder version:      8.13 (R2017b) 24-Jul-2017
+// 
+// ***Model details***
+// Step Size:                   0.1
+// Default parameter behaviour: Tunable
+// External Mode:               On
+// Allow OneStep and
+// CallExtMode FBs to be
+// called in different OBs      No
+// 
+// ***ODK 1500S details***  
+// Heap Size:                   32k
+// Max Block Size:              1024
+// Size of thread stack:        32k
+// SyncCallParallelCount:       1(max. number of parallel calls into this ODK application)
+// ********************************************************
+// 
+// Call this function to read or write parameters from/to Simulink Model.
+// Set write[IN] parameter to TRUE in order to write and set FALSE to read parameters
+  VAR_INPUT
+    "write" : BOOL;
+  END_VAR
+  VAR_OUTPUT
+    STATUS : INT := 0;
+
+  END_VAR
+  VAR_IN_OUT
+    "inOutParams" : "ModelPIDParams";
+  END_VAR
+  VAR
+    _odk_internal_Last_REQ : Bool := false;
+    _odk_internal_Last_BUSY : Bool := false;
+    _odk_internal_IN_BUFFER : Array [0..0] of Byte;
+    _odk_internal_INOUT_BUFFER : Array [0..103] of Byte;
+  END_VAR
+  VAR_TEMP 
+    _odk_internal_pos : DInt;
+    _odk_internal_err : Int;
+    _odk_internal_i : DInt;
+  END_VAR
+  VAR CONSTANT 
+    _odk_internal_INSTANCE_ID : UDINT := 4063686767;
+    _odk_internal_COMMAND : UDINT := 2137970399;
+  END_VAR
+BEGIN
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.5
+  // DO NOT CHANGE !!
+  //
+  // This is generated by Target 1500S for Simulink
+  // Model name:                  ModelPID
+  // Model version:               1.66
+  //                
+  // ODK 1500S version:           V2.5
+  // Target 1500S version:        V2.0         
+  // MATLAB version:              9.3 (R2017b) 24-Jul-2017
+  // Simulink version:            9.0 (R2017b) 24-Jul-2017
+  // MATLAB Coder version:        3.4 (R2017b) 24-Jul-2017
+  // Simulink Coder version:      8.13 (R2017b) 24-Jul-2017
+  // 
+  // ***Model details***
+  // Step Size:                   0.1
+  // Default parameter behaviour: Tunable
+  // External Mode:               On
+  // Allow OneStep and
+  // CallExtMode FBs to be
+  // called in different OBs      No
+  // 
+  // ***ODK 1500S details***  
+  // Heap Size:                   32k
+  // Max Block Size:              1024
+  // Size of thread stack:        32k
+  // SyncCallParallelCount:       1(max. number of parallel calls into this ODK application)
+  // ********************************************************
+  // 
+  // Call this function to read or write parameters from/to Simulink Model.
+  // Set write[IN] parameter to TRUE in order to write and set FALSE to read parameters
+  #_odk_internal_pos := 0;
+  IF (True = #write) THEN
+    #_odk_internal_IN_BUFFER[#_odk_internal_pos] := BYTE#1;
+  ELSE
+    #_odk_internal_IN_BUFFER[#_odk_internal_pos] := BYTE#0;
+  END_IF;
+  #_odk_internal_pos  := #_odk_internal_pos + 1;
+  #_odk_internal_pos := 0;
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_PIDController_D, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_PIDController_I, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_PIDController_N, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_PIDController_P, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_entcoupleSetpoint_Gain, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_entcoupleProcessValue_Gain, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_Integrator_gainval, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_Integrator_IC, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_Filter_gainval, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_Filter_IC, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_Saturation_UpperSat, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_Saturation_LowerSat, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #_odk_internal_err := WRITE_LITTLE ( src_variable := #inOutParams.#ModelPID_entcouplePIDout_Gain, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  #STATUS:=ODK_ExcS(INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
+                    COMMAND:=#_odk_internal_COMMAND,
+                    IN_DATA:=#_odk_internal_IN_BUFFER,
+                    INOUT_DATA:=#_odk_internal_INOUT_BUFFER,
+                    OUT_DATA:=null                    );
+  IF INT_TO_UINT(#STATUS) < 16#7000 THEN
+    #_odk_internal_pos := 0;
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_PIDController_D, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_PIDController_I, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_PIDController_N, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_PIDController_P, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_entcoupleSetpoint_Gain, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_entcoupleProcessValue_Gain, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_Integrator_gainval, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_Integrator_IC, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_Filter_gainval, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_Filter_IC, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_Saturation_UpperSat, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_Saturation_LowerSat, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+    #_odk_internal_err := READ_LITTLE (dest_variable  := #inOutParams.#ModelPID_entcouplePIDout_Gain, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
+  END_IF;
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.5
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
+END_FUNCTION_BLOCK
+
+
+TYPE "ModelPIDExtModeStatus"
+VERSION : 0.1
+//This PLC data type is used to show the status of internal functions called in ModelPIDCallExtMode FB.
+   STRUCT
+      Status_TCON : Word;   // This is the status of TCON block called in ModelPIDCallExtMode FB. Please refer to the STEP 7 documentation of TCON block for possible values of this parameter.
+      Status_TDISCON : Word;   // This is the status of TDISCON block called in ModelPIDCallExtMode FB. Please refer to the STEP 7 documentation of TDISCON block for possible values of this parameter.
+      Status_TRCV : Word;   // This is the status of TRCV block called in ModelPIDCallExtMode FB. Please refer to the STEP 7 documentation of TRCV block for possible values of this parameter.
+      Status_TSEND : Word;   // This is the status of TSEND block called in ModelPIDCallExtMode FB. Please refer to the STEP 7 documentation of TSEND block for possible values of this parameter.
+      Status_ODK : Int;   // This is the status of ModelPIDExtModeInternal ODK 1500S FB which is called in ModelPIDCallExtMode FB. Please refer to the ODK 1500S documentation for possible values of this parameter.
+      Status_ExtMode : Word;   // This is the status code for Target 1500S specific error cases. Please refer to the Target 1500S documentation for possible values of this parameter.
+   END_STRUCT;
+
+END_TYPE
+
+FUNCTION_BLOCK "ModelPIDCallExtMode"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+//This block is AUTO GENERATED - DO NOT MODIFY this block!
+//Created by Target 1500S version V2.0
+//at 2018-08-09 11:18:51 
+//********************************************************
+// This is generated by Target 1500S for Simulink
+// Model name:                  ModelPID
+// Model version:               1.66
+//               
+// ODK 1500S version:           V2.5
+// Target 1500S version:        V2.0         
+// MATLAB version:              9.3 (R2017b) 24-Jul-2017
+// Simulink version:            9.0 (R2017b) 24-Jul-2017
+// MATLAB Coder version:        3.4 (R2017b) 24-Jul-2017
+// Simulink Coder version:      8.13 (R2017b) 24-Jul-2017
+//
+// ***Model details***
+// Step Size:                   0.1
+// Default parameter behaviour: Tunable 
+// External Mode:               On
+// Allow OneStep and
+// CallExtMode FBs to be
+// called in different OBs      No
+//
+// ***ODK 1500S details***  
+// Heap Size:                   32k
+// Max Block Size:              1024
+// Size of thread stack:        32k
+// SyncCallParallelCount:       1(max. number of parallel calls into this ODK application)
+// ********************************************************
+//Call this FB to establish a connection to Simulink PC for External Mode.
+   VAR_INPUT 
+      EnableExtMode : Bool;
+      "HW-Identifier" : UInt := 64;
+      "LocalPort": UInt := 17725;
+      "OUC-Identifier" : CONN_OUC := 1;
+   END_VAR
+
+   VAR_OUTPUT 
+      STATUS : "ModelPIDExtModeStatus";
+   END_VAR
+
+   VAR 
+      TCON_Instance {OriginalPartName := 'T__CON'; LibVersion := '4.0'} : TCON;
+      TDISCON_Instance {OriginalPartName := 'T_DISCON'; LibVersion := '2.1'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TDISCON;
+      TRCV_Instance {OriginalPartName := 'T__RCV'; LibVersion := '4.0'} : TRCV;
+      TSEND_Instance {OriginalPartName := 'T__SEND'; LibVersion := '4.0'} : TSEND;
+      ModelPIDExtMode_Instance : "ModelPIDExtModeInternal";
+      tconParam {OriginalPartName := 'TCON_IP_v4'; LibVersion := '1.0'} : TCON_IP_v4;
+      tconREQ : Bool;
+      tconDONE : Bool;
+      tconBUSY : Bool;
+      tconERROR : Bool;
+      tdisconREQ : Bool;
+      tdisconDONE : Bool;
+      tdisconERROR : Bool;
+      tdisconBUSY : Bool;
+      trcvDONE : Bool;
+      trcvERROR : Bool;
+      trcvBUSY : Bool;
+      trcvRCVD_LEN : UDInt;
+      tsendREQ : Bool;
+      tsendDONE : Bool;
+      tsendBUSY : Bool;
+      tsendERROR : Bool;
+      tsendGrcREQ : Bool;
+      tsendGrcDONE : Bool;
+      tsendGrcBUSY : Bool;
+      tsendGrcERROR : Bool;
+      tsendGrcSTATUS : Word;
+      extModeOdkStatus : Int;
+      extModeFuncStatus : Word;
+      extModeFuncError : Bool;
+      extModeRCVD_LEN : UDInt;
+      st_STATUS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : "ModelPIDExtModeStatus";
+      prev_state : UDInt;
+      state : UDInt := 0;
+      messageBuf : Array[1..8] of Byte;
+	  dataExchangeBufToModel : Array[1..#BUF_SIZE] of Byte;
+	  dataExchangeBufFromModel : Array[1..#BUF_SIZE] of Byte;
+   END_VAR
+
+   VAR CONSTANT 
+      BUF_SIZE : UDInt := 65536;	// 64k
+      ST_IDLE : UDInt := 0;
+      ST_RECEIVE : UDInt := 1;
+      ST_SEND : UDInt := 2;
+      ST_DISCON : UDInt := 3;
+      ST_DISCON_GRACEFULL : UDInt := 4;
+      ST_EXEC_ODK : UDInt := 5;
+      EXT_MODEL_SHUTDOWN : Byte := 16#14;
+   END_VAR
+
+
+BEGIN
+// This is generated by Target 1500S for Simulink
+// Model name:                  ModelPID
+// Model version:               1.66
+//               
+// ODK 1500S version:           V2.5
+// Target 1500S version:        V2.0         
+// MATLAB version:              9.3 (R2017b) 24-Jul-2017
+// Simulink version:            9.0 (R2017b) 24-Jul-2017
+// MATLAB Coder version:        3.4 (R2017b) 24-Jul-2017
+// Simulink Coder version:      8.13 (R2017b) 24-Jul-2017
+//
+// ***Model details***
+// Step Size:                   0.1
+// Default parameter behaviour: Tunable 
+// External Mode:               On
+// Allow OneStep and
+// CallExtMode FBs to be
+// called in different OBs      No
+//
+// ***ODK 1500S details***  
+// Heap Size:                   32k
+// Max Block Size:              1024
+// Size of thread stack:        32k
+// SyncCallParallelCount:       1(max. number of parallel calls into this ODK application)
+// ********************************************************
+//Call this FB to establish a connection to Simulink PC for External Mode.
+	
+	IF NOT #EnableExtMode THEN
+	    RETURN;
+	END_IF;
+	#tconParam.ID := #"OUC-Identifier";
+	#tconParam.LocalPort := #"LocalPort";
+	#tconParam.InterfaceId := #"HW-Identifier";
+	
+	IF #state <> #ST_EXEC_ODK THEN
+	    #prev_state := #state;
+	END_IF;
+	
+	CASE #state OF
+	    #ST_IDLE:
+	        IF NOT #tconBUSY THEN
+	            #tconREQ := NOT #tconREQ;
+	        END_IF;
+	        #TCON_Instance(REQ := #tconREQ,
+	                       ID := #tconParam.ID,
+	                       DONE => #tconDONE,
+	                       BUSY => #tconBUSY,
+	                       ERROR => #tconERROR,
+	                       STATUS => #st_STATUS.Status_TCON,
+	                       CONNECT := #tconParam);
+	        IF #tconDONE THEN
+	            #state := #ST_RECEIVE;
+	        END_IF;
+	    #ST_RECEIVE:
+	        #TRCV_Instance(EN_R := TRUE,
+	                       ID := #tconParam.ID,
+	                       LEN := #BUF_SIZE,
+	                       ADHOC := TRUE,
+	                       NDR => #trcvDONE,
+	                       BUSY => #trcvBUSY,
+	                       ERROR => #trcvERROR,
+	                       STATUS => #st_STATUS.Status_TRCV,
+	                       RCVD_LEN => #trcvRCVD_LEN,
+	                       DATA := #dataExchangeBufToModel);
+	        #state := #ST_EXEC_ODK;
+	    #ST_SEND:
+	        IF NOT #tsendBUSY THEN
+	            #tsendREQ := NOT #tsendREQ;
+	        END_IF;
+	        #TSEND_Instance(REQ := #tsendREQ,
+	                        ID := #tconParam.ID,
+	                        LEN := #extModeRCVD_LEN,
+	                        DONE => #tsendDONE,
+	                        BUSY => #tsendBUSY,
+	                        ERROR => #tsendERROR,
+	                        STATUS => #st_STATUS.Status_TSEND,
+	                        DATA := #dataExchangeBufFromModel);
+	        
+	        IF #tsendDONE THEN
+	            #state := #ST_RECEIVE;
+	        ELSIF #tsendERROR THEN
+	            #state := #ST_DISCON;
+	        ELSE
+	            #state := #ST_EXEC_ODK;
+	        END_IF;
+	    #ST_EXEC_ODK:
+	        #ModelPIDExtMode_Instance(stateIn := #prev_state,
+	                                       stateOut => #state,
+	                                       receiveLength := #trcvRCVD_LEN,
+	                                       sendLength => #extModeRCVD_LEN,
+	                                       STATUS => #st_STATUS.Status_ODK,
+	                                       funcError => #extModeFuncError,
+	                                       funcStatus => #st_STATUS.Status_ExtMode,
+	                                       bufferToModel := #dataExchangeBufToModel,
+	                                       bufferFromModel := #dataExchangeBufFromModel);
+	        IF #st_STATUS.Status_ODK <> 0 THEN
+	            #state := #ST_DISCON_GRACEFULL;
+	        END_IF;
+	    #ST_DISCON:
+	        IF NOT #tdisconBUSY THEN
+	            #tdisconREQ := NOT #tdisconREQ;
+	        END_IF;
+	        #extModeRCVD_LEN := 0;
+	        #trcvRCVD_LEN := 0;
+	        #TDISCON_Instance(REQ := #tdisconREQ,
+	                          ID := #tconParam.ID,
+	                          DONE => #tdisconDONE,
+	                          BUSY => #tdisconBUSY,
+	                          ERROR => #tdisconERROR,
+	                          STATUS => #st_STATUS.Status_TDISCON);
+	        IF #tdisconDONE OR #tdisconERROR THEN
+	            #state := #ST_IDLE;
+	        END_IF;
+	    #ST_DISCON_GRACEFULL:
+	        IF NOT #tsendGrcBUSY THEN
+	            #tsendGrcREQ := NOT #tsendGrcREQ;
+	        END_IF;
+	        #messageBuf[1] := #EXT_MODEL_SHUTDOWN;
+	        #TSEND_Instance(REQ := #tsendGrcREQ,
+	                        ID := #tconParam.ID,
+	                        LEN := 8,
+	                        DONE => #tsendGrcDONE,
+	                        BUSY => #tsendGrcBUSY,
+	                        ERROR => #tsendGrcERROR,
+	                        DATA := #messageBuf);
+	        
+	        IF #tsendGrcDONE OR #tsendGrcERROR THEN
+	            #state := #ST_DISCON;
+	        END_IF;
+	END_CASE;
+	
+	#STATUS.Status_TCON := #st_STATUS.Status_TCON;
+	#STATUS.Status_TDISCON := #st_STATUS.Status_TDISCON;
+	#STATUS.Status_TSEND := #st_STATUS.Status_TSEND;
+	#STATUS.Status_TRCV := #st_STATUS.Status_TRCV;
+	#STATUS.Status_ODK := #st_STATUS.Status_ODK;
+	#STATUS.Status_ExtMode := #st_STATUS.Status_ExtMode;
+	
+
+END_FUNCTION_BLOCK
+

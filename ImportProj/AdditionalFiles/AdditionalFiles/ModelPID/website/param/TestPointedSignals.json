@@ -1,0 +1,12 @@
+{
+	"WriteEnabled":":="ModelPIDWebVisuInterface".WriteParameters:",
+	"Time":":="ModelPIDWebVisuInterface".RunTime:",
+	"TestPointedSignals":[
+":="ModelPIDWebVisuInterface".InternalModelSignals.sig_PID:",
+":="ModelPIDWebVisuInterface".InternalModelSignals.sig_Difference:",
+":="ModelPIDWebVisuInterface".InternalModelSignals.sig_SatOut:",
+":="ModelPIDWebVisuInterface".InternalModelSignals.sig_ProcessValue:",
+":="ModelPIDWebVisuInterface".InternalModelSignals.sig_Setpoint:"
+
+]
+}

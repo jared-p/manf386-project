@@ -1,0 +1,12 @@
+DATA_BLOCK "ModelPIDWebVisuInterface"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 2.0
+NON_RETAIN
+   VAR
+      Params : "ModelPIDParams";
+      InternalModelSignals : "ModelPIDInternalModelSignals";
+      RunTime : LReal;
+      WriteParameters : Bool;
+   END_VAR
+BEGIN
+END_DATA_BLOCK

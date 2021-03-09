@@ -1,0 +1,10 @@
+{
+	"TestPointedSignals":[
+		{
+"Name":"sig_PID","id":"tps_sig_PID"},{
+"Name":"sig_Difference","id":"tps_sig_Difference"},{
+"Name":"sig_SatOut","id":"tps_sig_SatOut"},{
+"Name":"sig_ProcessValue","id":"tps_sig_ProcessValue"},{
+"Name":"sig_Setpoint","id":"tps_sig_Setpoint"}
+]
+}

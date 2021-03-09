@@ -1,0 +1,191 @@
+<!--Prototyp Simulink Web Visualisierung-->
+<!DOCTYPE html>
+<html id="Page" data-ng-app="SWV" data-ng-controller="ctrl-basic-operations">
+<head>
+
+    <!-- MetaData Area -->
+    <title id="id-title-website">{{ModelName}}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="cache-control" content="no-cache">
+    <!-- MetaData Area End -->
+    <!-- Style Sheet Area -->
+    <link rel="stylesheet" href="css/S7_framework.css">
+    <link rel="stylesheet" href="css/SWV_ParameterSetting.css">
+    <link rel="stylesheet" href="css/SWV_SimulinkScope.css">
+    <!-- Style Sheet Area End -->
+    <!-- Scripts Libraries -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery.svg.min.js"></script>
+    <script src="js/jquery.flot.min.js"></script>
+    <script src="js/jquery.flot.time.js"></script>
+    <script src="js/jquery.flot.axislabels.js"></script>
+    <script src="js/jquery.flot.navigate.min.js"></script>
+    <script src="js/jquery.flot.canvas.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-sanitize.min.js"></script>
+    <script src="js/module-SWV.js"></script>
+    <script src="js/ctrl-basic-operations.js"></script>
+    <script src="js/ctrl-parameter-setting.js"></script>
+    <script src="js/ctrl-trace-handler.js"></script>
+    <script src="js/ctrl-model-svg.js"></script>
+    <script src="js/Wrapper_SVG_Angular.js"></script>
+    <!-- Scripts Libraries End -->
+
+</head>
+
+<body id="Main">
+
+<!-- Header Area -->
+<div id="header_img"></div>
+<div id="header_title">{{UserTitle}}</div>
+<div id="statusContainer">
+    Write values: {{formatWriteEnabled()}}
+</div>
+<!-- Header Area End -->
+
+<!-- Template for side menu -->
+<script type="text/ng-template" id="svgModels">
+    <a data-ng-click="openSvg(svgBlocks)">{{svgBlocks.Name}}</a>
+    <ul data-ng-if="svgBlocks.Blocks">
+        <li data-ng-repeat="svgBlocks in svgBlocks.Blocks" data-ng-include="'svgModels'"
+            data-ng-class="{'menuActive':svgBlocks == CurrentSvgModel}">
+        </li>
+    </ul>
+</script>
+
+<!-- Menu Area -->
+<div id="menu">
+    <ul>
+        <li><a href='home.html'>Home</a></li>
+        <li data-ng-show="ShowMenueP"><a data-ng-click="openParams('Params','all',false);">Params</a></li>
+        <li data-ng-show="ShowMenueWSP"><a data-ng-click="openParams('WorkspaceParams','default',false);">WorkspaceParams</a>
+        </li>
+        <li data-ng-show="ShowMenueMWSP"><a data-ng-click="openParams('ModelWorkspaceParams','default',false);">ModelWorkspaceParams</a>
+        </li>
+        <!--<li data-ng-show="ShowBackSvgFunction"><a data-ng-click="openPreviousSvg();">Back to previous System</a></li>-->
+
+        <li data-ng-class="{'menuActive': RootSvgModel == CurrentSvgModel }">
+            <a data-ng-click="openSvg(RootSvgModel);">{{RootSvgModel.Name}}</a>
+            <ul>
+                <li data-ng-repeat="svgBlocks in RootSvgModel.Blocks" data-ng-include="'svgModels'"
+                    data-ng-class="{'menuActive':svgBlocks == CurrentSvgModel}"></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!-- Menu Area End -->
+<!-- Title Area -->
+<div id="user_title"><h1>{{SubSystemName}}</h1></div>
+<!-- Title Area End -->
+<!-- Log IN Area -->
+<div id="login">
+    <!--
+    <iframe id="WebserverIFrame" name="WebserverIFrame" src="/Portal/Portal.mwsl"></iframe>
+    -->
+    <div id="loginBox" class="Login_Area"></div>
+</div>
+<!-- Log IN Area End -->
+<!-- Content Area -->
+<div id="content">
+    <p></p>
+    <object id="SVG_Graphic" data-ng-controller="ctrl-model-svg" data="" type="image/svg+xml">
+        <!-- Fallback -->
+    </object>
+</div>
+<!-- Content Area End -->
+<!-- Function Area -->
+<div id="ParameterSetting" ng-show="ShowParams" ng-controller="ctrl-parameter-setting">
+    <div class="Container">
+        <div>
+            <h1>Parameterliste - {{ListTyp}}</h1>
+        </div>
+        <div class="tableContainer">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="param in Parameter">
+                    <td>{{param.name}}</td>
+                    <td>
+                        <label>
+                            <input ng-model="param.value" string-to-number type='number' step='any'
+                                   value="{{param.value}}">
+                        </label>
+                        <button data-ng-click="writeParams(param.BlockID)">
+                            Submit
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <div class="controlPanel">
+                <button data-ng-click="readParams('Reload')">
+                    Reload
+                </button>
+                <button data-ng-click="closeParams()">
+                    Exit
+                </button>
+                {{writeStatus}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="SimulinkScope" ng-show="ShowTrace" ng-controller="ctrl-trace-handler">
+    <div class="Container">
+        <div class="ScopeContainer">
+            <div id="placeholder" class="Scope"></div>
+        </div>
+        <table class="controlPanel">
+            <tbody>
+            <tr>
+                <td>
+                    <button data-ng-click="autoScale()" data-ng-disabled="plot === null">Autoscale</button>
+                </td>
+                <td></td>
+                <td style="text-align: right;">
+                    <button data-ng-click="traceToPNG()">Save as Image</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="yInput">
+                        <div class="inputContainer">
+                            <label for="minY">MinY:</label>
+                            <input id="minY" ng-model="minY" type='number' step='1' value="{{minY}}">
+                        </div>
+                        <div class="inputContainer">
+                            <label for="maxY">MaxY:</label>
+                            <input id="maxY" ng-model="maxY" type='number' step='1' value="{{maxY}}">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="inputContainer">
+                        <label for="Time">Time:</label>
+                        <input id="Time" ng-model="measureInterval" type='number' step='1' min="1"
+                               value="{{measureInterval}}">
+                    </div>
+                </td>
+                <td>
+                    <div class="traceButtons">
+                        <button data-ng-click="toggleTrace()">{{toggleBtnTxt()}}</button>
+                        <button data-ng-click="closeTrace()">Exit</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Function Area End -->
+
+</body>
+</html>
