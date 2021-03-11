@@ -1,0 +1,33 @@
+PROGRAM IRL;
+
+IMPORT DATALIST 'GettingStarted.psl';
+VAR
+   TEACH ROBTARGET: POS1;
+   TEACH ROBTARGET: POS2;
+   TEACH ROBTARGET: POS3;
+VAR
+   POSE: GPP_Gripper := POSE(POSITION(0.0,0.0,107.0), ORIZYX(0.0,0.0,0.0));
+VAR
+   OUTPUT BOOL        :        Grasp        AT 0;
+
+BEGIN
+
+R_SPEED := 750;
+R_ACC := 3000;
+R_C_CP := 0;
+R_TOOL := GPP_Gripper;
+
+MOVE PTP POS1;
+MOVE PTP POS2 + POSITION (0.0,0.0,50.0);
+MOVE LIN POS2;
+GRASP := TRUE;
+MOVE LIN POS2 + POSITION (0.0,0.0,50.0);
+MOVE PTP POS3 + POSITION (0.0,0.0,50.0);
+MOVE LIN POS3;
+GRASP := FALSE;
+MOVE LIN POS3 + POSITION (0.0,0.0,50.0);
+
+MOVE PTP POS1;
+
+ENDPROGRAM;
+--------------------------------------------------------------------------------------------------------------
