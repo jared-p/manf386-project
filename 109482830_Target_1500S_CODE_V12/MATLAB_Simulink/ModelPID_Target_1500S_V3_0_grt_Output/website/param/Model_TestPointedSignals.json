@@ -1,0 +1,9 @@
+{
+	"TestPointedSignals":[
+		{
+"Name":"setpoint","id":"tps_setpoint"},{
+"Name":"processval","id":"tps_processval"},{
+"Name":"outpid","id":"tps_outpid"},{
+"Name":"sig_sum","id":"tps_sig_sum"}
+]
+}
