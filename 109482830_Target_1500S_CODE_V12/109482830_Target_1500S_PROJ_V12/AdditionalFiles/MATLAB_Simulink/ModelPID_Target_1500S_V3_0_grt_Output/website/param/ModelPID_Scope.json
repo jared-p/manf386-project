@@ -1,1 +1,0 @@
-{"TraceConfig": {"Name":"Scope","FullBlockPath":"ModelPID/Scope","Inputs":["setpoint","processval","outpid"]}}
