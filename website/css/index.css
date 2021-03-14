@@ -1,0 +1,19 @@
+#toggle_submit{
+    background-color: red;
+    height: 3em;
+    width: 8em;
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+}
+#main{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: ivory;
+}
+fieldset{
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}
