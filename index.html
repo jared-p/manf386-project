@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>PLC Web Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<script type="text/javascript" src='js/index.js'></script>-->
+    <style>
+        #toggle_submit {
+            background-color: red;
+            height: 3em;
+            width: 8em;
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+            margin: 1em;
+        }
+
+        #main {
+            width: 30%;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: ivory;
+        }
+
+        fieldset {
+            width: 20%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <!-- AWP_In_Variable Name='"DataBase".str'-->
+    <!-- AWP_In_Variable Name='"DataBase".counter'-->
+    <!-- AWP_In_Variable Name='"DataBase".auto'-->
+
+    <body>
+        <div id="main">
+            <input type='button' id="toggle_submit" value="Manual">
+
+            <form method='post' id='text_form' action='/awp/index2.html'>
+                <label for="text_input">Set:</label>
+                <input type='text' name='str' id='text_input' name='"DataBase".str'>
+                <input type='submit' value="Submit Change" id="text_submit">
+            </form>
+
+            <form method="post" action="/awp/index2.html" id="num_form">
+                <label for="vol">Number:</label>
+                <input type="number" id="num_input" name='"DataBase".counter' min="0" max="10">
+                <input type="submit">
+              </form>
+
+            <form method="post" action="/awp/index2.html" id="toggle_form">
+                <legend>Manual Mode</legend>
+                <input type="radio" id="toggle_on" name='"DataBase".auto' value="1">
+                <label for="toggle_on">ON</label><br>
+                <input type="radio" id="toggle_off" name='"DataBase".auto' value="0">
+                <label for="toggle_off">OFF</label><br>
+                <input type="Submit" value="Update">
+            </form>
+
+              <p>
+                String: :="DataBase".str: <br>
+                Number: :="DataBase".counter: <br>
+                Manual: :="DataBase".auto:
+            </p>
+        </div>
+    </body>
+
+    </html>
+
+</body>
+
+</html>
