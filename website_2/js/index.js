@@ -7,6 +7,8 @@ window.addEventListener('load', function () {
     var textInput = document.querySelector('#text_input');
     var increment = document.querySelector('#increment');
     var decrement = document.querySelector('#decrement');
+    var inc_form = document.querySelector('#increment_form');
+    var dec_form = document.querySelector('#decrement_form');
 
     if (toggleVal.value == 1) {
         toggleSubmit.value = "Automatic";
@@ -58,5 +60,23 @@ window.addEventListener('load', function () {
             e.preventDefault();
             alert("You cannot override in automatic mode");
         }
+    });
+    inc_form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var increment = document.querySelector('#increment_value');
+        var decrement = document.querySelector('#decrement_value');
+        var incVal = parseInt(increment.value);
+        var decVal = parseInt(decrement.value);
+        increment.value = incVal + 1;
+        decrement.value = decVal + 1;
+    });
+    dec_form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var increment = document.querySelector('#increment_value');
+        var decrement = document.querySelector('#decrement_value');
+        var incVal = increment.value;
+        var decVal = decrement.value;
+        increment.value = incVal - 1;
+        decrement.value = decVal - 1;
     });
 });
