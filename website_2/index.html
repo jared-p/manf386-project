@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="refresh" content="10">-->
+    <title>PLC Web Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src='js/jquery-3.1.1.min.js'></script>
+    <script type="text/javascript" src='js/index.js'></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <!-- AWP_In_Variable Name='"str"'-->
+    <!-- AWP_In_Variable Name='"counter"'-->
+    <!-- AWP_In_Variable Name='"auto"'-->
+
+    <body>
+        <div id="main">
+            <form id='toggle_form' method='post' action='/awp/index.html'>
+                <span>Toggle Mode</span>
+                <input type='button' id="toggle_submit" value="Manual">
+                <input type='hidden' id='toggle_val' value=0 name='"auto"'>
+            </form>
+
+            <form method='post' id='text_form' action='/awp/index.html'>
+                <label for="text_input">Set:</label>
+                <input type='text' name='str' id='text_input' name='"str"'>
+                <input type='submit' value="Submit Change" id="text_submit">
+            </form>
+
+            <fieldset>
+                <legend>Incrementor</legend>
+                <form method='post' action='/awp/index.html'>
+                    <input type="submit" id="increment" value="+">
+                    <input type="hidden" name='"counter"' value="1">
+                </form>
+                <form method='post' action='/awp/index.html'>
+                    <input type="submit" id="decrement" value="-">
+                    <input type="hidden" name='"counter"' value="0">
+                </form>
+            </fieldset>
+            <p>
+                String: :="str": <br>
+                Counter: :="counter": <br>
+                AUtomatic: :="auto":
+            </p>
+        </div> <!-- May be probelmatic -->
+    </body>
+
+    </html>
+
+</body>
+
+</html>
