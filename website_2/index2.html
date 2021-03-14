@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <!--<meta http-equiv="refresh" content="10">-->
+    
     <title>PLC Web Application</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<script type="text/javascript" src='js/index.js'></script>-->
@@ -66,6 +66,11 @@
                     <input type="submit" id="decrement" value="-">
                     <input type="hidden" name='"DataBase".counter' value="0" id="decrement_value">
                 </form>
+                <p id="counter_display"></p>
+                <form method='post' action='/awp/index2.html' id="counter_form">
+                    <input type="submit" id="counter_submit" value="Counter Update">
+                    <input type="hidden" name='"DataBase".counter' value="-1" id="counter_value">
+                </form>
             </fieldset>
             <p>
                 String: :="DataBase".str: <br>
@@ -73,7 +78,7 @@
                 Automatic: :="DataBase".auto:
             </p>
         </div> <!-- May be probelmatic -->
-        <script>
+        <script type="text/javascript">
             var toggleForm = document.querySelector('#toggle_form');
             var toggleSubmit = document.querySelector('#toggle_submit');
             var toggleVal = document.querySelector('#toggle_val');
@@ -84,6 +89,10 @@
             var decrement = document.querySelector('#decrement');
             var inc_form = document.querySelector('#increment_form');
             var dec_form = document.querySelector('#decrement_form');
+            var counter_form = document.querySelector('#counter_form');
+            var counter_value = document.querySelector('#counter_value');
+            var counter_display = document.querySelector('#counter_display');
+            var counter_submit = document.querySelector('#counter_submit');
 
             if (toggleVal.value == 1) {
                 toggleSubmit.value = "Automatic";
@@ -92,11 +101,14 @@
                 textInput.disabled = true;
                 increment.disabled = true;
                 decrement.disabled = true;
+                counter_submit.disabled = true;
+                
             } else {
                 textSubmit.disabled = false;
                 textInput.disabled = false;
                 increment.disabled = false;
                 decrement.disabled = false;
+                counter_submit.disabled = false;
             }
             toggleSubmit.addEventListener('click', function (e) {
                 var toggleForm = document.querySelector('#toggle_form');
@@ -107,7 +119,8 @@
                 var textInput = document.querySelector('#text_input');
                 var increment = document.querySelector('#increment');
                 var decrement = document.querySelector('#decrement');
-                if (e.target.nodeName == 'INPUT')
+                var counter_submit = document.querySelector('#counter_submit');
+                if (e.tarpost.nodeName == 'INPUT')
                     e.preventDefault();
                 var value = toggleVal.value;
                 if (value == 0) {
@@ -118,6 +131,7 @@
                     textInput.disabled = true;
                     increment.disabled = true;
                     decrement.disabled = true;
+                    counter_submit.disabled = true;
                 } else {
                     value = 0;
                     toggleSubmit.value = "Manual";
@@ -126,6 +140,7 @@
                     textInput.disabled = false;
                     increment.disabled = false;
                     decrement.disabled = false;
+                    counter_submit.disabled = false;
                 }
                 toggleVal.value = value;
             });
@@ -140,20 +155,28 @@
                 e.preventDefault();
                 var increment = document.querySelector('#increment_value');
                 var decrement = document.querySelector('#decrement_value');
+                var counter_display = document.querySelector('#counter_display');
                 var incVal = parseInt(increment.value);
                 var decVal = parseInt(decrement.value);
                 increment.value = incVal + 1;
                 decrement.value = decVal + 1;
+                counter_display.innerHTML = decrement.value;
+
             });
             dec_form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 var increment = document.querySelector('#increment_value');
                 var decrement = document.querySelector('#decrement_value');
+                var counter_display = document.querySelector('#counter_display');
                 var incVal = increment.value;
                 var decVal = decrement.value;
                 increment.value = incVal - 1;
                 decrement.value = decVal - 1;
+                counter_display.innerHTML = decrement.value;
             });
+
+            
+
         </script>
     </body>
 
