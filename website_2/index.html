@@ -5,9 +5,30 @@
     <!--<meta http-equiv="refresh" content="10">-->
     <title>PLC Web Application</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src='js/jquery-3.1.1.min.js'></script>
-    <script type="text/javascript" src='js/index.js'></script>
-    <link rel="stylesheet" href="css/index.css">
+    <!--<script type="text/javascript" src='js/index.js'></script>-->
+    <style>
+        #toggle_submit {
+            background-color: red;
+            height: 3em;
+            width: 8em;
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+        }
+
+        #main {
+            width: 30%;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: ivory;
+        }
+
+        fieldset {
+            width: 20%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,21 +38,21 @@
     <!DOCTYPE html>
     <html lang="en">
 
-    <!-- AWP_In_Variable Name='"str"'-->
-    <!-- AWP_In_Variable Name='"counter"'-->
-    <!-- AWP_In_Variable Name='"auto"'-->
+    <!-- AWP_In_Variable Name='"DataBase".str'-->
+    <!-- AWP_In_Variable Name='"DataBase".counter'-->
+    <!-- AWP_In_Variable Name='"DataBase".auto'-->
 
     <body>
         <div id="main">
             <form id='toggle_form' method='post' action='/awp/index.html'>
                 <span>Toggle Mode</span>
                 <input type='button' id="toggle_submit" value="Manual">
-                <input type='hidden' id='toggle_val' value=0 name='"auto"'>
+                <input type='hidden' id='toggle_val' value=0 name='"DataBase".auto'>
             </form>
 
             <form method='post' id='text_form' action='/awp/index.html'>
                 <label for="text_input">Set:</label>
-                <input type='text' name='str' id='text_input' name='"str"'>
+                <input type='text' name='str' id='text_input' name='"DataBase".str'>
                 <input type='submit' value="Submit Change" id="text_submit">
             </form>
 
@@ -39,19 +60,81 @@
                 <legend>Incrementor</legend>
                 <form method='post' action='/awp/index.html'>
                     <input type="submit" id="increment" value="+">
-                    <input type="hidden" name='"counter"' value="1">
+                    <input type="hidden" name='"DataBase".counter' value="1">
                 </form>
                 <form method='post' action='/awp/index.html'>
                     <input type="submit" id="decrement" value="-">
-                    <input type="hidden" name='"counter"' value="0">
+                    <input type="hidden" name='"DataBase".counter' value="0">
                 </form>
             </fieldset>
             <p>
-                String: :="str": <br>
-                Counter: :="counter": <br>
-                AUtomatic: :="auto":
+                String: :="DataBase".str: <br>
+                Counter: :="DataBase".counter: <br>
+                Automatic: :="DataBase".auto:
             </p>
         </div> <!-- May be probelmatic -->
+        <script>
+            var toggleForm = document.querySelector('#toggle_form');
+            var toggleSubmit = document.querySelector('#toggle_submit');
+            var toggleVal = document.querySelector('#toggle_val');
+            var textForm = document.querySelector('#text_form');
+            var textSubmit = document.querySelector('#text_submit');
+            var textInput = document.querySelector('#text_input');
+            var increment = document.querySelector('#increment');
+            var decrement = document.querySelector('#decrement');
+
+            if (toggleVal.value == 1) {
+                toggleSubmit.value = "Automatic";
+                toggleSubmit.style.backgroundColor = "green";
+                textSubmit.disabled = true;
+                textInput.disabled = true;
+                increment.disabled = true;
+                decrement.disabled = true;
+            } else {
+                textSubmit.disabled = false;
+                textInput.disabled = false;
+                increment.disabled = false;
+                decrement.disabled = false;
+            }
+            toggleSubmit.addEventListener('click', function (e) {
+                var toggleForm = document.querySelector('#toggle_form');
+                var toggleSubmit = document.querySelector('#toggle_submit');
+                var toggleVal = document.querySelector('#toggle_val');
+                var textForm = document.querySelector('#text_form');
+                var textSubmit = document.querySelector('#text_submit');
+                var textInput = document.querySelector('#text_input');
+                var increment = document.querySelector('#increment');
+                var decrement = document.querySelector('#decrement');
+                if (e.target.nodeName == 'INPUT')
+                    e.preventDefault();
+                var value = toggleVal.value;
+                if (value == 0) {
+                    value = 1;
+                    toggleSubmit.value = "Automatic";
+                    toggleSubmit.style.backgroundColor = "green";
+                    textSubmit.disabled = true;
+                    textInput.disabled = true;
+                    increment.disabled = true;
+                    decrement.disabled = true;
+                } else {
+                    value = 0;
+                    toggleSubmit.value = "Manual";
+                    toggleSubmit.style.backgroundColor = "red";
+                    textSubmit.disabled = false;
+                    textInput.disabled = false;
+                    increment.disabled = false;
+                    decrement.disabled = false;
+                }
+                toggleVal.value = value;
+            });
+            textForm.addEventListener('submit', function (e) {
+                var toggleVal = document.querySelector('#toggle_val');
+                if (toggleVal.value == 1) {
+                    e.preventDefault();
+                    alert("You cannot override in automatic mode");
+                }
+            });
+        </script>
     </body>
 
     </html>
